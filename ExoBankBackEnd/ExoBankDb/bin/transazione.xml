@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.exobank.mapper.TransazioneMapper">
+
+
+
+	<resultMap id="TransazioneResult"
+		type="it.exobank.model.Transazione">
+		<id property="id" column="TRANSAZIONEID" />
+		<result property="dataTransazione" column="dataTransazione" />
+		<result property="importo" column="IMPORTO" />
+		<result property="descrizione" column="DESCRIZIONE" />
+		<association property="statoTransazione"
+			javaType="it.exobank.model.StatoTransazione">
+			<id property="id" column="STATOTRANSAZIONEID" />
+			<result property="statoTransazione" column="STATOTRANSAZIONE" />
+		</association>
+		<association property="tipoTransazione"
+			javaType="it.exobank.model.TipoTransazione">
+			<id property="id" column="TIPOTRANSAZIONEID" />
+			<result property="tipoTransazione" column="TIPOTRANSAZIONE" />
+		</association>
+		<association property="contoCorrente"
+			javaType="it.exobank.model.ContoCorrente">
+			<id property="id" column="CONTOCORRENTEID" />
+			<result property="numeroConto" column="NUMEROCONTO" />
+			<result property="saldo" column="SALDO" />
+			<association property="statoContoCorrente"
+				javaType="it.exobank.model.StatoContoCorrente">
+				<id property="statoContoCorrenteId" column="STATOCONTOCORRENTEID" />
+				<result property="nomeStato" column="NOMESTATO" />
+			</association>
+			<association property="utente"
+				javaType="it.exobank.model.Utente">
+				<id property="utenteId" column="UTENTEID" />
+				<result property="nome" column="NOME" />
+				<result property="cognome" column="COGNOME" />
+				<result property="email" column="EMAIL" />
+				<association property="ruoloId"
+					javaType="it.exobank.model.Ruolo">
+					<id property="ruoloId" column="RUOLOID" />
+					<result property="nomeRuolo" column="NOMERUOLO" />
+				</association>
+			</association>
+		</association>
+		<association property="contoCorrenteBeneficiario"
+			columnPrefix="beneficiario_"
+			javaType="it.exobank.model.ContoCorrente">
+			<id property="id" column="CONTOCORRENTEID" />
+			<result property="numeroConto" column="NUMEROCONTO" />
+			<result property="saldo" column="SALDO" />
+			<association property="statoContoCorrente"
+				javaType="it.exobank.model.StatoContoCorrente">
+				<id property="statoContoCorrenteId" column="STATOCONTOCORRENTEID" />
+				<result property="nomeStato" column="NOMESTATO" />
+			</association>
+			<association property="utente"
+				javaType="it.exobank.model.Utente">
+				<id property="utenteId" column="UTENTEID" />
+				<result property="nome" column="NOME" />
+				<result property="cognome" column="COGNOME" />
+				<result property="email" column="EMAIL" />
+				<association property="ruoloId"
+					javaType="it.exobank.model.Ruolo">
+					<id property="ruoloId" column="RUOLOID" />
+					<result property="nomeRuolo" column="NOMERUOLO" />
+				</association>
+			</association>
+		</association>
+		
+	</resultMap>
+
+
+	<insert id="insertTransazione"
+		parameterType="it.exobank.model.Transazione">
+		
+		INSERT INTO Transazione (IMPORTO, TIPOTRANSAZIONEID,
+		CONTOCORRENTEID, CONTOCORRENTEBENEFICIARIO, DESCRIZIONE)
+		VALUES (#{importo},
+		#{tipoTransazione.id},
+		#{contoCorrente.id},
+		#{contoCorrenteBeneficiario.id},
+		#{descrizione})
+		
+	</insert>
+
+
+
+
+	<select id="findTransazioneById" parameterType="Integer"
+		resultMap="TransazioneResult">
+
+		SELECT
+		t.TRANSAZIONEID,
+		t.dataTransazione,
+		t.IMPORTO,
+		t.STATOTRANSAZIONEID,
+		t.DESCRIZIONE,
+		s.STATOTRANSAZIONE,
+		t.TIPOTRANSAZIONEID,
+		tipo.TIPOTRANSAZIONE,
+		t.CONTOCORRENTEBENEFICIARIO AS
+		beneficiario_CONTOCORRENTEBENEFICIARIO,
+		CASE
+		WHEN
+		t.CONTOCORRENTEBENEFICIARIO IS NOT NULL THEN cb.NUMEROCONTO
+		ELSE NULL
+		END AS beneficiario_NUMEROCONTO,
+		CASE
+		WHEN t.CONTOCORRENTEBENEFICIARIO
+		IS NOT NULL THEN cb.SALDO
+		ELSE NULL
+		END AS beneficiario_SALDO,
+		CASE
+		WHEN
+		t.CONTOCORRENTEBENEFICIARIO IS NOT NULL THEN cb.UTENTEID
+		ELSE NULL
+		END
+		AS beneficiario_UTENTEID,
+		CASE
+		WHEN t.CONTOCORRENTEBENEFICIARIO IS NOT
+		NULL THEN ut.NOME
+		ELSE NULL
+		END AS beneficiario_NOME,
+		CASE
+		WHEN
+		t.CONTOCORRENTEBENEFICIARIO IS NOT NULL THEN ut.COGNOME
+		ELSE NULL
+		END AS
+		beneficiario_COGNOME,
+		CASE
+		WHEN t.CONTOCORRENTEBENEFICIARIO IS NOT NULL
+		THEN ut.EMAIL
+		ELSE NULL
+		END AS beneficiario_EMAIL,
+		CASE
+		WHEN
+		t.CONTOCORRENTEBENEFICIARIO IS NOT NULL THEN cb.STATOCONTOCORRENTEID
+		ELSE NULL
+		END AS beneficiario_STATOCONTOCORRENTEID,
+		t.CONTOCORRENTEID,
+		c.NUMEROCONTO,
+		c.SALDO,
+		c.STATOCONTOCORRENTEID,
+		sc.NOMESTATO,
+		c.UTENTEID,
+		u.NOME,
+		u.COGNOME,
+		u.EMAIL
+		FROM transazione t
+		INNER JOIN statoTransazione
+		s ON t.STATOTRANSAZIONEID =
+		s.STATOTRANSAZIONEID
+		INNER JOIN
+		tipoTransazione tipo ON t.TIPOTRANSAZIONEID =
+		tipo.TIPOTRANSAZIONEID
+		INNER JOIN contoCorrente c ON t.CONTOCORRENTEID = c.CONTOCORRENTEID
+		INNER JOIN utente u ON c.UTENTEID = u.UTENTEID
+		INNER JOIN
+		statoContoCorrente sc ON c.STATOCONTOCORRENTEID =
+		sc.STATOCONTOCORRENTEID
+		LEFT JOIN contoCorrente cb ON
+		t.CONTOCORRENTEBENEFICIARIO =
+		cb.CONTOCORRENTEID
+		LEFT JOIN utente ut ON
+		cb.UTENTEID = ut.UTENTEID
+		LEFT JOIN statoContoCorrente st ON
+		cb.STATOCONTOCORRENTEID =
+		st.STATOCONTOCORRENTEID
+		WHERE
+		t.TRANSAZIONEID =
+		#{id};
+
+
+
+
+	</select>
+
+
+
+
+
+
+	<select id="findTransazioneByUtenteId" parameterType="Integer"
+		resultMap="TransazioneResult">
+
+		SELECT
+		t.TRANSAZIONEID,
+		t.dataTransazione,
+		t.IMPORTO,
+		t.STATOTRANSAZIONEID,
+		t.DESCRIZIONE,
+		s.STATOTRANSAZIONE,
+		t.TIPOTRANSAZIONEID,
+		tipo.TIPOTRANSAZIONE,
+		t.CONTOCORRENTEBENEFICIARIO AS
+		beneficiario_CONTOCORRENTEBENEFICIARIO,
+		CASE
+		WHEN
+		t.CONTOCORRENTEBENEFICIARIO IS NOT NULL THEN cb.NUMEROCONTO
+		ELSE NULL
+		END AS beneficiario_NUMEROCONTO,
+		CASE
+		WHEN t.CONTOCORRENTEBENEFICIARIO
+		IS NOT NULL THEN cb.SALDO
+		ELSE NULL
+		END AS beneficiario_SALDO,
+		CASE
+		WHEN
+		t.CONTOCORRENTEBENEFICIARIO IS NOT NULL THEN cb.UTENTEID
+		ELSE NULL
+		END
+		AS beneficiario_UTENTEID,
+		CASE
+		WHEN t.CONTOCORRENTEBENEFICIARIO IS NOT
+		NULL THEN ut.NOME
+		ELSE NULL
+		END AS beneficiario_NOME,
+		CASE
+		WHEN
+		t.CONTOCORRENTEBENEFICIARIO IS NOT NULL THEN ut.COGNOME
+		ELSE NULL
+		END AS
+		beneficiario_COGNOME,
+		CASE
+		WHEN t.CONTOCORRENTEBENEFICIARIO IS NOT NULL
+		THEN ut.EMAIL
+		ELSE NULL
+		END AS beneficiario_EMAIL,
+		CASE
+		WHEN
+		t.CONTOCORRENTEBENEFICIARIO IS NOT NULL THEN cb.STATOCONTOCORRENTEID
+		ELSE NULL
+		END AS beneficiario_STATOCONTOCORRENTEID,
+		t.CONTOCORRENTEID,
+		c.NUMEROCONTO,
+		c.SALDO,
+		c.STATOCONTOCORRENTEID,
+		sc.NOMESTATO,
+		c.UTENTEID,
+		u.NOME,
+		u.COGNOME,
+		u.EMAIL
+		FROM transazione t
+		INNER JOIN statoTransazione
+		s ON t.STATOTRANSAZIONEID =
+		s.STATOTRANSAZIONEID
+		INNER JOIN
+		tipoTransazione tipo ON t.TIPOTRANSAZIONEID =
+		tipo.TIPOTRANSAZIONEID
+		INNER JOIN contoCorrente c ON t.CONTOCORRENTEID = c.CONTOCORRENTEID
+		INNER JOIN utente u ON c.UTENTEID = u.UTENTEID
+		INNER JOIN
+		statoContoCorrente sc ON c.STATOCONTOCORRENTEID =
+		sc.STATOCONTOCORRENTEID
+		LEFT JOIN contoCorrente cb ON
+		t.CONTOCORRENTEBENEFICIARIO =
+		cb.CONTOCORRENTEID
+		LEFT JOIN utente ut ON
+		cb.UTENTEID = ut.UTENTEID
+		LEFT JOIN statoContoCorrente st ON
+		cb.STATOCONTOCORRENTEID =
+		st.STATOCONTOCORRENTEID
+		WHERE u.UTENTEID
+		=
+		#{id}		
+		ORDER BY t.dataTransazione;
+	</select>
+
+
+
+
+	<select id="findAllTransazione" resultMap="TransazioneResult">
+
+		SELECT
+		t.TRANSAZIONEID,
+		t.dataTransazione,
+		t.IMPORTO,
+		t.STATOTRANSAZIONEID,
+		t.DESCRIZIONE,
+		s.STATOTRANSAZIONE,
+		t.TIPOTRANSAZIONEID,
+		tipo.TIPOTRANSAZIONE,
+		t.CONTOCORRENTEBENEFICIARIO AS beneficiario_CONTOCORRENTEBENEFICIARIO,
+		CASE
+		WHEN t.CONTOCORRENTEBENEFICIARIO IS NOT NULL THEN cb.NUMEROCONTO
+		ELSE NULL
+		END AS beneficiario_NUMEROCONTO,
+		CASE
+		WHEN
+		t.CONTOCORRENTEBENEFICIARIO IS NOT NULL THEN cb.SALDO
+		ELSE NULL
+		END AS
+		beneficiario_SALDO,
+		CASE
+		WHEN t.CONTOCORRENTEBENEFICIARIO IS NOT NULL
+		THEN cb.UTENTEID
+		ELSE NULL
+		END AS beneficiario_UTENTEID,
+		CASE
+		WHEN
+		t.CONTOCORRENTEBENEFICIARIO IS NOT NULL THEN ut.NOME
+		ELSE NULL
+		END AS
+		beneficiario_NOME,
+		CASE
+		WHEN t.CONTOCORRENTEBENEFICIARIO IS NOT NULL
+		THEN ut.COGNOME
+		ELSE NULL
+		END AS beneficiario_COGNOME,
+		CASE
+		WHEN
+		t.CONTOCORRENTEBENEFICIARIO IS NOT NULL THEN ut.EMAIL
+		ELSE NULL
+		END AS
+		beneficiario_EMAIL,
+		CASE
+		WHEN t.CONTOCORRENTEBENEFICIARIO IS NOT NULL
+		THEN cb.STATOCONTOCORRENTEID
+		ELSE NULL
+		END AS
+		beneficiario_STATOCONTOCORRENTEID,
+		t.CONTOCORRENTEID,
+		c.NUMEROCONTO,
+		c.SALDO,
+		c.STATOCONTOCORRENTEID,
+		sc.NOMESTATO,
+		c.UTENTEID,
+		u.NOME,
+		u.COGNOME,
+		u.EMAIL
+		FROM transazione t
+		INNER JOIN statoTransazione s ON
+		t.STATOTRANSAZIONEID =
+		s.STATOTRANSAZIONEID
+		INNER JOIN tipoTransazione
+		tipo ON t.TIPOTRANSAZIONEID =
+		tipo.TIPOTRANSAZIONEID
+		INNER JOIN
+		contoCorrente c ON t.CONTOCORRENTEID = c.CONTOCORRENTEID
+		INNER JOIN
+		utente u ON c.UTENTEID = u.UTENTEID
+		INNER JOIN statoContoCorrente sc ON
+		c.STATOCONTOCORRENTEID =
+		sc.STATOCONTOCORRENTEID
+		LEFT JOIN contoCorrente
+		cb ON t.CONTOCORRENTEBENEFICIARIO =
+		cb.CONTOCORRENTEID
+		LEFT JOIN utente
+		ut ON cb.UTENTEID = ut.UTENTEID
+		LEFT JOIN statoContoCorrente st ON
+		cb.STATOCONTOCORRENTEID =
+		st.STATOCONTOCORRENTEID
+		ORDER BY
+		t.TRANSAZIONEID;
+
+
+	</select>
+
+
+	<update id="updateTransazione"
+		parameterType="it.exobank.model.Transazione">
+
+		UPDATE
+		transazione
+		SET STATOTRANSAZIONEID =
+		#{statoTransazione.id}
+		WHERE TRANSAZIONEID = #{id}
+	</update>
+
+	<select id="findLastTransazione" resultMap="TransazioneResult">
+
+		SELECT
+		t.TRANSAZIONEID,
+		t.dataTransazione,
+		t.IMPORTO,
+		t.STATOTRANSAZIONEID,
+		t.DESCRIZIONE,
+		s.STATOTRANSAZIONE,
+		t.TIPOTRANSAZIONEID,
+		tipo.TIPOTRANSAZIONE,
+		t.CONTOCORRENTEBENEFICIARIO AS beneficiario_CONTOCORRENTEBENEFICIARIO,
+		CASE
+		WHEN t.CONTOCORRENTEBENEFICIARIO IS NOT NULL THEN cb.NUMEROCONTO
+		ELSE NULL
+		END AS beneficiario_NUMEROCONTO,
+		CASE
+		WHEN
+		t.CONTOCORRENTEBENEFICIARIO IS NOT NULL THEN cb.SALDO
+		ELSE NULL
+		END AS
+		beneficiario_SALDO,
+		CASE
+		WHEN t.CONTOCORRENTEBENEFICIARIO IS NOT NULL
+		THEN cb.UTENTEID
+		ELSE NULL
+		END AS beneficiario_UTENTEID,
+		CASE
+		WHEN
+		t.CONTOCORRENTEBENEFICIARIO IS NOT NULL THEN ut.NOME
+		ELSE NULL
+		END AS
+		beneficiario_NOME,
+		CASE
+		WHEN t.CONTOCORRENTEBENEFICIARIO IS NOT NULL
+		THEN ut.COGNOME
+		ELSE NULL
+		END AS beneficiario_COGNOME,
+		CASE
+		WHEN
+		t.CONTOCORRENTEBENEFICIARIO IS NOT NULL THEN ut.EMAIL
+		ELSE NULL
+		END AS
+		beneficiario_EMAIL,
+		CASE
+		WHEN t.CONTOCORRENTEBENEFICIARIO IS NOT NULL
+		THEN cb.STATOCONTOCORRENTEID
+		ELSE NULL
+		END AS
+		beneficiario_STATOCONTOCORRENTEID,
+		t.CONTOCORRENTEID,
+		c.NUMEROCONTO,
+		c.SALDO,
+		c.STATOCONTOCORRENTEID,
+		sc.NOMESTATO,
+		c.UTENTEID,
+		u.NOME,
+		u.COGNOME,
+		u.EMAIL
+		FROM transazione t
+		INNER JOIN statoTransazione s ON
+		t.STATOTRANSAZIONEID =
+		s.STATOTRANSAZIONEID
+		INNER JOIN tipoTransazione
+		tipo ON t.TIPOTRANSAZIONEID =
+		tipo.TIPOTRANSAZIONEID
+		INNER JOIN
+		contoCorrente c ON t.CONTOCORRENTEID = c.CONTOCORRENTEID
+		INNER JOIN
+		utente u ON c.UTENTEID = u.UTENTEID
+		INNER JOIN statoContoCorrente sc ON
+		c.STATOCONTOCORRENTEID =
+		sc.STATOCONTOCORRENTEID
+		LEFT JOIN contoCorrente
+		cb ON t.CONTOCORRENTEBENEFICIARIO =
+		cb.CONTOCORRENTEID
+		LEFT JOIN utente
+		ut ON cb.UTENTEID = ut.UTENTEID
+		LEFT JOIN statoContoCorrente st ON
+		cb.STATOCONTOCORRENTEID =
+		st.STATOCONTOCORRENTEID
+		WHERE
+		t.TRANSAZIONEID =
+		(SELECT
+		last_insert_id());
+
+
+	</select>
+
+
+
+</mapper>

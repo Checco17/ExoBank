@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.exobank.mapper.StatoTransazioneMapper">    
+
+ <resultMap  id="StatoTransazioneResult" type="it.exobank.model.StatoTransazione">
+ <id property="id" column="STATOTRANSAZIONEID"/>
+ <result property="statoTransazione" column="STATOTRANSAZIONE"/>
+ </resultMap>
+ 
+ 
+    <select id="findAllStatoTransazione" resultMap="StatoTransazioneResult">
+        SELECT statoTransazione.STATOTRANSAZIONEID, statoTransazione.STATOTRANSAZIONE
+        FROM StatoTransazione
+    </select>
+
+
+    
+
+</mapper>

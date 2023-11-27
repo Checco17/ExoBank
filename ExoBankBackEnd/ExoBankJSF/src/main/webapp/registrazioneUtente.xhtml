@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:form>
+	<div class="containerLogin">
+		<h1>Registrazione Utente</h1>
+		<div>
+			<h:outputLabel for="nome">Nome:</h:outputLabel>
+			<h:inputText class="inputLogin" id="nome"
+				value="#{utenteBean.utente.nome}" />
+		</div>
+		<br />
+		<div>
+			<h:outputLabel for="cognome">Cognome:</h:outputLabel>
+			<h:inputText class="inputLogin" id="cognome"
+				value="#{utenteBean.utente.cognome}" />
+		</div>
+		<br />
+		<div>
+			<h:outputLabel for="email">Email:</h:outputLabel>
+			<h:inputText class="inputLogin" id="email"
+				value="#{utenteBean.utente.email}" />
+		</div>
+		<br />
+		<div>
+			<h:outputLabel for="password">Password:</h:outputLabel>
+			<h:inputSecret class="inputLogin" id="password"
+				value="#{utenteBean.utente.password}" />
+		</div>
+		<br />
+		<div>
+			<h:commandButton class="buttonLogin" value="REGISTRATI"
+				action="#{utenteBean.insertUtente}" />
+		</div>
+
+		<div>
+			<h:commandButton class="buttonLogin" value="INDIETRO"
+				action="#{handleBean.setSwitchNumb(1)}" />
+		</div>
+	</div>
+</h:form>
+
+<h:messages />
+
+</html>

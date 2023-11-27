@@ -1,0 +1,41 @@
+package it.exobank.DTO;
+
+import java.io.Serializable;
+
+public class Dto<T> implements Serializable{
+	
+	
+	private static final long serialVersionUID = 1L;
+	private boolean success;
+	private String errore;
+	private T data;
+
+	public boolean isSuccess() {
+		return success;
+	}
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+
+	public String getErrore() {
+		return errore;
+	}
+
+	public void setErrore(String errore) {
+		this.errore = errore;
+		success = false;
+	}
+
+	public T getData() {
+		return data;
+	}
+
+	public void setData(T data) {
+		this.data = data;
+		this.success = true;
+	}
+
+}
+
+

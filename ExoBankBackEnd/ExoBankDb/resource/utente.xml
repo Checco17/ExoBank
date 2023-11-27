@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.exobank.mapper.UtenteMapper">
+
+	<resultMap id="UtenteResult" type="it.exobank.model.Utente">
+        <id property="utenteId" column="UTENTEID" />
+        <result property="nome" column="NOME" />
+        <result property="cognome" column="COGNOME" />
+        <result property="email" column="EMAIL" />
+        <result property="password" column="PASSWORD" />
+        <association property="ruoloId" javaType="it.exobank.model.Ruolo">
+            <id property="ruoloId" column="RUOLOID" />
+            <result property="nomeRuolo" column="NOMERUOLO"/>
+        </association>
+    </resultMap>
+    
+	<select id="findAllUtente" resultMap="UtenteResult">
+		SELECT
+		utente.UTENTEID,
+		utente.NOME, 
+		utente.COGNOME,
+		utente.EMAIL, 
+		utente.PASSWORD, 
+		ruolo.RUOLOID , ruolo.NOMERUOLO
+		FROM 
+		utente, ruolo 
+		WHERE 
+		utente.RUOLOID = ruolo.RUOLOID
+	</select>
+	
+	<select id="findByEmailPassword"  parameterType="it.exobank.model.Utente" resultMap="UtenteResult">
+	
+		SELECT
+		utente.UTENTEID, 
+		utente.NOME, 
+		utente.COGNOME, 
+		utente.EMAIL, 
+		utente.PASSWORD, 
+		ruolo.RUOLOID , 
+		ruolo.NOMERUOLO
+		FROM 
+		utente, ruolo 
+		WHERE 
+		utente.RUOLOID = ruolo.RUOLOID AND utente.EMAIL = #{email} AND utente.PASSWORD = #{password}
+	
+	</select>
+
+
+ <insert id="insertUtente" parameterType="it.exobank.model.Utente" >
+    
+    INSERT INTO Utente (NOME, COGNOME, EMAIL, PASSWORD) 
+    VALUES (#{nome}, #{cognome}, #{email}, #{password})
+    
+</insert>
+	
+	 <select id="findUtenteById" parameterType="Integer" resultMap="UtenteResult"> 
+	 SELECT * 
+	 FROM 
+	 Utente 
+	 WHERE 
+	 UTENTEID = #{utenteId}
+	 </select> 
+
+
+
+</mapper>

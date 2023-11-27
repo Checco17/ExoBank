@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.exobank.mapper.TipoTransazioneMapper">
+
+
+    <resultMap id="TipoTransazioneResult" type="it.exobank.model.TipoTransazione">
+    <id property="id" column="TIPOTRANSAZIONEID"/>
+    <result property="tipoTransazione" column="TIPOTRANSAZIONE"/>
+    </resultMap>
+
+    <select id="findAllTipoTransazione" resultMap="TipoTransazioneResult">
+        SELECT tipoTransazione.TIPOTRANSAZIONEID, tipoTransazione.TIPOTRANSAZIONE
+        FROM tipoTransazione
+    </select>
+
+  
+<!-- 
+	Il tag <collection> in MyBatis è utilizzato quando devi gestire una relazione uno-a-molti 
+	tra l'oggetto principale e uno o più oggetti associati. 
+	Un esempio comune potrebbe essere un utente con una collezione di ordini. 
+	Ecco come funziona:
+	Definizione dell'associazione: Utilizzi il tag <collection> all'interno di un <resultMap> per stabilire l'associazione 
+	tra una proprietà dell'oggetto principale (ad esempio, un utente) 
+	e una collezione di oggetti associati (ad esempio, ordini).
+	Attributi principali:
+
+	-PROPERTY: Con questo attributo, specifica il nome della proprietà dell'oggetto principale che conterrà la collezione di oggetti associati.
+	 In questo caso, potrebbe essere la proprietà "orders" dell'oggetto utente.
+	-OFTYPE: Con questo attributo, specifica il tipo di classe degli oggetti contenuti nella collezione. 
+	 Ad esempio, se hai una collezione di ordini, imposterai ofType="Order".
+	-Mapping delle colonne: All'interno del tag <collection>, puoi utilizzare i tag <id> e <result> per definire come mappare le colonne
+	 nel risultato della query ai membri degli oggetti associati. 
+	 Questo consente di recuperare e mappare i dati dei singoli oggetti associati (come gli ordini) in modo accurato.     
+ -->
+</mapper>
+

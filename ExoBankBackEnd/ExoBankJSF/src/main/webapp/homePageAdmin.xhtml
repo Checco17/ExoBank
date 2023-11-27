@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+<div class="containerLogin">
+	<h1>Benvenuto #{utenteBean.utente.nome},
+		#{utenteBean.utente.cognome} !</h1>
+
+		<h:messages/>
+
+	<div>
+		<h:commandButton class="buttonLogin" value="Lista Transazioni"
+			action="#{handleBean.setSwitchNumb(1)}" />
+	</div>
+
+	<div>
+		<h:commandButton class="buttonLogin" value="Lista Conto Corrente"
+			action="#{handleBean.setSwitchNumb(2)}" />
+	</div>
+
+	<div>
+		<h:commandButton class="buttonLogin" value="Lista Utenti"
+			action="#{handleBean.setSwitchNumb(3)}" />
+	</div>
+
+	<div>
+		<h:commandButton class="buttonLogin" value="Logout"
+			action="#{utenteBean.logout()}" />
+	</div>
+</div>
+
+
+
+</html>

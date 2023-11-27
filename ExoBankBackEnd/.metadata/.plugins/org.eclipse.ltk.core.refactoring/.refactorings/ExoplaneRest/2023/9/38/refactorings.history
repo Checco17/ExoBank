@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;ControllerRestApplication.java&apos; to &apos;ExoBankRest/src/main/java/it.francesco.conf&apos;&#x0D;&#x0A;- Original project: &apos;ExoplaneRest&apos;&#x0D;&#x0A;- Destination element: &apos;ExoBankRest/src/main/java/it.francesco.conf&apos;&#x0D;&#x0A;- Original element: &apos;it.exolab.exoplane.conf.ControllerRestApplication.java&apos;" description="Copy compilation unit" destination="=ExoBankRest/src\/main\/java&lt;it.francesco.conf" element1="/src&lt;it.exolab.exoplane.conf{ControllerRestApplication.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1695303983113" units="1" version="1.0"/>
+</session>

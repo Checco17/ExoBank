@@ -1,0 +1,353 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(90deg, #c7c5f4, #776bcc);
+    font: bold;
+  }
+  
+  .containerLogin {
+    background-color: linear-gradient(90deg, #6a681d, #0b0919);
+    max-width: 400px;
+    height: 480px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 30px;
+  }
+
+  .containerAperturaConto {
+    background-color: linear-gradient(90deg, #6a681d, #0b0919);
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 30px;
+  }
+
+  .containerRegister {
+    background-color: linear-gradient(90deg, #6a681d, #0b0919);
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 30px;
+  }
+
+  .containerHomePageCliente {
+    background-color: linear-gradient(90deg, #6a681d, #0b0919);
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 30px;
+  }
+
+  .containerHomePageAmministratore {
+    background-color: linear-gradient(90deg, #6a681d, #0b0919);
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 30px;
+  } 
+
+  .containerErrorPage {
+    background-color: linear-gradient(90deg, #6a681d, #0b0919);
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 30px;
+  }
+
+  .containerListaContiCorrente {
+    background-color: linear-gradient(90deg, #6a681d, #0b0919);
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 30px;
+    
+  }
+  .containerListaContiCorrente table{
+    margin: 0 auto;
+  }
+
+
+  .containerListaUtenti {
+    background-color: linear-gradient(90deg, #6a681d, #0b0919);
+    max-width: 730px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 30px;
+  }
+  .containerListaUtenti table{
+    margin: 0 auto;
+  }
+
+
+  .containerListaTransazioni {
+    background-color: linear-gradient(90deg, #6a681d, #0b0919);
+    max-width: 1150px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 30px;
+  }
+  .containerListaTransazioni table{
+    margin: 0 auto;
+  }
+
+
+  .containerOperazioniCliente {
+    background-color: linear-gradient(90deg, #6a681d, #0b0919);
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 30px;
+  }
+  .containerOperazioniCliente table{
+    margin: 0 auto;
+  }
+
+
+  .containerListaTransazioniUtente {
+    background-color: linear-gradient(90deg, #6a681d, #0b0919);
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 30px;
+  }
+  .containerListaTransazioniUtente table{
+    margin: 0 auto;
+  }
+
+
+  .containerPratoFiorito {
+    background-color: linear-gradient(90deg, #6a681d, #0b0919);
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 30px;
+    
+  }
+
+
+
+
+  
+  h1 {
+    font-size: 24px;
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+  
+ 
+  label {
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+    font: bold
+  }
+  
+  input[type="email"],
+  input[type="text"],
+  input[type="password"] {
+    width: 90%;
+    padding: 10px;
+    margin: 0px 0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  
+  
+  input[type="button"] {
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: auto;
+    border: none;
+    border-radius: 50px;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: rgba(0, 0, 255, 0.683);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 10px;
+  }
+  
+  input[type="button"]:hover {
+    background-color: #0056b3;
+  }
+
+  div {
+    margin-top: 20px;
+  }
+
+  button[type="button"] {
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 50px;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: rgba(0, 0, 255, 0.683);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 10px;
+  }
+  
+  button[type="button"]:hover {
+    background-color: #0056b3;
+  }
+  
+
+
+
+
+
+th {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+}
+
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+
+td, th {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+
+.back-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+
+
+
+
+.navbar {
+  background-color: #333333; 
+  color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  height: 70px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  border-radius: 20px;
+}
+
+
+
+
+
+.navbar-nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+
+
+
+.exit-button {
+  background-color: #ff4444; 
+  color: #fff; 
+  padding: 8px 16px; 
+  border: none;
+  border-radius: 4px;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.exit-button:hover {
+  background-color: #ff0000; 
+}
+
+
+.selectChange {
+  appearance: none;
+  background-color: rgb(152, 193, 222);
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 150px;
+  border-radius: 20px;
+  text-align: center;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+
+.selectChange option:checked {
+  background-color: #3498db;
+  color: #fff;
+}
+
+
+.selectChange option:hover {
+  background-color: #2980b9;
+  color: #fff;
+}
+
+.selectChange:focus {
+  outline: none;
+  border-radius: 20px;
+
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+}
+

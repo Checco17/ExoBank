@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Index Page</title>
+    <link rel="stylesheet" type="text/css" href="custom.css" />
+</h:head>
+<h:body>
+    <h:form>       
+            <ui:fragment rendered="#{handleBean.switchNumb == '1'}">
+                <ui:include src="loginPage.xhtml" />
+            </ui:fragment>
+            <ui:fragment rendered="#{handleBean.switchNumb == '2'}">
+                <ui:include src="registrazioneUtente.xhtml" />
+            </ui:fragment>
+            <ui:fragment rendered="#{handleBean.switchNumb == '3'}">
+                <ui:include src="homePageAdmin.xhtml" />
+            </ui:fragment>
+            <ui:fragment rendered="#{handleBean.switchNumb == '4'}">
+                <ui:include src="homePageClient.xhtml" />
+            </ui:fragment>
+      
+    </h:form>
+</h:body>
+</html>
+
+<!--
+<ui:fragment>:È un tag di Facelets che consente di includere o escludere dinamicamente parti di codice in base a una condizione booleana specificata dall'attributo "rendered".
+È utile per il rendering condizionale del contenuto.
+
+<ui:include>: È un tag di Facelets che consente di includere il contenuto di un'altra pagina XHTML all'interno della pagina corrente.
+È utile per la composizione del modello di pagine da parti riutilizzabili.
+
+<h:head>: È un tag di JavaServer Faces (JSF) che consente di includere i metadati dell'intestazione HTML nella pagina.
+È solitamente utilizzato per specificare il titolo della pagina, collegamenti a fogli di stile e altri metadati.
+
+<h:body>: È un tag di JSF che rappresenta il corpo della pagina HTML.
+È il contenitore principale per tutti gli elementi HTML visibili nella pagina.
+
+<h:form>: È un tag di JSF che rappresenta un modulo HTML.
+È utilizzato per raccogliere input dall'utente e inviare dati al server.
+
+<h:outputLabel>: È un tag di JSF che rappresenta un'etichetta HTML associata a un componente di input, come un campo di testo.
+È utilizzato per etichettare componenti di input per scopi di accessibilità e usabilità.
+
+<h:inputText>: È un tag di JSF che rappresenta un campo di testo HTML per l'input dell'utente.
+È utilizzato per raccogliere testo o dati inseriti dall'utente.
+
+<h:commandButton>: È un tag di JSF che rappresenta un pulsante HTML che l'utente può fare clic per inviare il modulo al server.
+È utilizzato per attivare azioni lato server quando viene premuto.
+
+<ui:composition>: È un tag di Facelets che consente di definire un modello di pagina base che può essere esteso o sovrascritto da altre pagine.
+È utile per creare una struttura comune per le pagine del tuo sito.
+
+<ui:define>: È un tag di Facelets utilizzato all'interno di <ui:composition> per definire aree specifiche di sovrascrittura all'interno del modello di pagina.
+È utilizzato per definire dove il contenuto delle pagine derivate sarà inserito all'interno del modello. 
+ -->

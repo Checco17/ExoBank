@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.exobank.mapper.StatoContoCorrenteMapper">
+
+
+<select id="findAllStatoContoCorrente" resultType="it.exobank.model.StatoContoCorrente">
+        SELECT statoContoCorrente.STATOCONTOCORRENTEID,  statoContoCorrente.NOMESTATO
+        FROM statoContoCorrente
+    </select>
+
+
+</mapper>

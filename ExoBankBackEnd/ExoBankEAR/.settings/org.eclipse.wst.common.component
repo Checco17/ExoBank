@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+                    
+    
+    
+    
+    <wb-module deploy-name="ExoBankEAR">
+                                        
+        
+        
+        
+        <wb-resource deploy-path="/" source-path="/EarContent" tag="defaultRootSource"/>
+                                
+        
+        
+        <dependent-module archiveName="ExoBankRest.war" deploy-path="/" handle="module:/resource/ExoBankRest/ExoBankRest">
+                                                
+            
+            
+            <dependency-type>uses</dependency-type>
+                                            
+        
+        
+        </dependent-module>
+                
+        <dependent-module archiveName="mybatis-3.5.13.jar" deploy-path="/lib" handle="module:/classpath/lib/C:/Users/Exolab/Mybatis/mybatis-3.5.13.jar">
+                        
+            <dependency-type>uses</dependency-type>
+                    
+        </dependent-module>
+                
+        <dependent-module archiveName="ExoBankDb.jar" deploy-path="/lib" handle="module:/resource/ExoBankDb/ExoBankDb">
+                        
+            <dependency-type>uses</dependency-type>
+                    
+        </dependent-module>
+                
+        <dependent-module archiveName="ExoBankModel.jar" deploy-path="/lib" handle="module:/resource/ExoBankModel/ExoBankModel">
+                        
+            <dependency-type>uses</dependency-type>
+                    
+        </dependent-module>
+                
+        <dependent-module archiveName="ExoBankEjb.jar" deploy-path="/" handle="module:/resource/ExoBankEjb/ExoBankEjb">
+                        
+            <dependency-type>uses</dependency-type>
+                    
+        </dependent-module>
+        <dependent-module archiveName="ExoBankUtils.jar" deploy-path="/lib" handle="module:/resource/ExoBankUtils/ExoBankUtils">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+                                    
+    
+    
+    
+    </wb-module>
+                
+
+
+
+</project-modules>

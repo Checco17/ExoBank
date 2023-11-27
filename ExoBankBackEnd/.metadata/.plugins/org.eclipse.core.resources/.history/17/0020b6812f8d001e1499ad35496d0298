@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="it.exobank.mapper.ContoCorrenteMapper">
+
+	<resultMap id="ContoCorrenteResult"
+		type="it.exobank.model.ContoCorrente">
+		<id property="id" column="CONTOCORRENTEID" />
+		<result property="numeroConto" column="NUMEROCONTO" />
+		<result property="saldo" column="SALDO" />
+		<association property="statoContoCorrente"
+			javaType="it.exobank.model.StatoContoCorrente">
+			<id property="statoContoCorrenteId" column="STATOCONTOCORRENTEID" />
+			<result property="nomeStato" column="NOMESTATO" />
+		</association>
+		<association property="utente"
+			javaType="it.exobank.model.Utente">
+			<id property="utenteId" column="UTENTEID" />
+			<result property="nome" column="NOME" />
+			<result property="cognome" column="COGNOME" />
+			<result property="email" column="EMAIL" />
+			<association property="ruoloId"
+				javaType="it.exobank.model.Ruolo">
+				<id property="ruoloId" column="RUOLOID" />
+				<result property="nomeRuolo" column="NOMERUOLO" />
+			</association>
+		</association>
+	</resultMap>
+
+	<insert id="insertContoCorrente"
+		parameterType="it.exobank.model.ContoCorrente">
+
+		INSERT INTO ContoCorrente (NUMEROCONTO, SALDO, UTENTEID)
+		VALUES
+		(#{numeroConto}, #{saldo}, #{utente.utenteId})
+	</insert>
+
+
+	<select id="findAllContoCorrente"
+
+		resultMap="ContoCorrenteResult"
+		resultType="it.exobank.model.ContoCorrente">
+		SELECT 
+		contoCorrente.CONTOCORRENTEID,
+		contoCorrente.NUMEROCONTO, 
+		contoCorrente.SALDO,
+		statocontocorrente.STATOCONTOCORRENTEID, 
+		statocontocorrente.NOMESTATO,
+		utente.UTENTEID, 
+		utente.EMAIL, 
+		utente.NOME, 
+		utente.COGNOME,
+		ruolo.RUOLOID, 
+		ruolo.NOMERUOLO
+		FROM 
+		contocorrente, statocontocorrente, utente, ruolo
+		WHERE
+		contocorrente.STATOCONTOCORRENTEID = statocontocorrente.STATOCONTOCORRENTEID AND contocorrente.UTENTEID = utente.UTENTEID AND utente.RUOLOID = ruolo.RUOLOID;
+
+
+	</select>
+
+	<select id="findContoCorrenteByUtenteId" parameterType="Integer"
+		resultMap="ContoCorrenteResult" resultType="it.exobank.model.ContoCorrente">
+		
+		SELECT 
+		contoCorrente.CONTOCORRENTEID,
+		contoCorrente.NUMEROCONTO,
+		contoCorrente.SALDO, 
+		contoCorrente.STATOCONTOCORRENTEID, 
+		utente.UTENTEID,
+		utente.NOME, 
+		utente.COGNOME,
+		utente.EMAIL
+		FROM 
+		utente, contoCorrente		
+		WHERE 
+		contoCorrente.UTENTEID = utente.UTENTEID AND contoCorrente.UTENTEID = #{utente.utenteId} ;
+	</select>
+
+	<select resultMap="ContoCorrenteResult" id="findContoCorrenteByNumbConto" parameterType="it.exobank.model.ContoCorrente">
+		
+		SELECT 
+		contoCorrente.CONTOCORRENTEID,
+		contoCorrente.NUMEROCONTO,
+		contoCorrente.SALDO, 
+		utente.UTENTEID,
+		utente.NOME, 
+		utente.COGNOME,
+		utente.EMAIL, 
+		utente.RUOLOID,
+		contoCorrente.STATOCONTOCORRENTEID,
+		statoContoCorrente.NOMESTATO
+		FROM 
+		contoCorrente, statoContoCorrente, utente
+		WHERE
+		contoCorrente.UTENTEID = utente.UTENTEID AND
+		contoCorrente.STATOCONTOCORRENTEID =
+		statoContoCorrente.STATOCONTOCORRENTEID AND contoCorrente.NUMEROCONTO = #{numeroConto}
+
+
+	</select>
+
+
+
+	<update id="updateContoCorrente" parameterType="it.exobank.model.ContoCorrente">
+		
+		UPDATE 
+		contoCorrente
+		SET 
+		STATOCONTOCORRENTEID = 	#{statoContoCorrente.statoContoCorrenteId} ,SALDO = #{saldo}
+		WHERE 
+		NUMEROCONTO = #{numeroConto}
+		
+	</update>
+
+</mapper>

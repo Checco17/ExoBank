@@ -1,0 +1,70 @@
+@charset "ISO-8859-1";
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(90deg, rgb(255, 128, 64), #040216);;
+    font: bold;
+  }
+  
+ .containerLogin {
+    background-color: linear-gradient(90deg, rgb(106, 104, 29), #0b0919);
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 30px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border-radius: 30px;
+  }
+  
+ h1 {
+    font-size: 24px;
+    color: rgb(255, 128, 64);
+    margin-bottom: 20px;
+  }
+  
+ label{
+	display: block;
+    text-align: center;
+    margin-bottom: 10px;
+    font: bold
+  }
+  
+ .buttonLogin {
+    font-size: 18px;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 50px;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: rgb(255, 128, 64);
+    margin-bottom: 10px;
+}
+
+.buttonLogin:hover {
+    background-color: rgb(255, 255, 0);
+}
+
+  
+  
+  .inputLogin {
+    width: 90%;
+    padding: 10px;
+    margin: 0px 0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+  
+  .messageError {
+	  color : red;
+	  text-align: center;	  
+  }
+  
+  .message {
+	  color : green;
+	  text-align: center;
+  }
+  
+  
